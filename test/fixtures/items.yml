@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parent_id: 
+  definition: MyString
+  truthy: false
+
+two:
+  parent_id: 
+  definition: MyString
+  truthy: false

@@ -1,0 +1,10 @@
+<tr>
+  <td><%= link_to item.id, item %></td>
+  <td><%= item.parent.try(:id) %></td>
+  <td><%= item.definition %></td>
+  <td><%= item.truthy %></td>
+  <td><%= link_to "Delete", item,
+    method: :delete,
+    class: '',
+    data: { confirm: "Are you sure ? .This action will remove #{item.definition} from the sytem. "} %></td>
+</tr>

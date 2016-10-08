@@ -1,0 +1,31 @@
+<%= form_for @item do |f| %>
+  <ul>
+    <li>
+      <div>
+        <%= render partial: 'root_item', locals: { f: f } %>
+        <ul>
+          <li>
+            <div class="children-wrapper if-children-wrapper">
+              <%= link_to_add_fields 'Add  rule', f, :children %>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <span>ELSE</span>
+        <ul>
+          <li>
+            <div class="children-wrapper else-children-wrapper">
+              <%= link_to_add_fields 'Add  rule', f, :children, {truthy: false}  %>
+            </div>
+          </li>
+        </ul>
+        <span>END</span>
+      </div>
+    </li>
+  </ul>
+  <div class="push-right">
+    <%= link_to 'Cancel', items_path, class: ""   %>
+    <%= f.submit "Save", class: "" %>
+  </div>
+<% end %>

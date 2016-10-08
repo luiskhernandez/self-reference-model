@@ -1,0 +1,20 @@
+<%= link_to new_item_path, class: "" do  %>
+  <span class="">Add</span>
+<% end %>
+
+<section class="">
+  <table class="">
+    <thead>
+      <tr>
+        <th>
+          <td>id</td>
+          <td>Definition</td>
+          <td>truthy</td>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @items %>
+    </tbody>
+  </table>
+</section>
