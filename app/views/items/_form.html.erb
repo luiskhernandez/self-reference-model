@@ -5,8 +5,13 @@
         <%= render partial: 'root_item', locals: { f: f } %>
         <ul>
           <li>
+            <div>
+              <%= f.fields_for :children do |c|  %>
+                <%= render partial: 'child_fields', locals: { f: c } %>
+              <% end %>
+            </div>
             <div class="children-wrapper if-children-wrapper">
-              <%= link_to_add_fields 'Add  rule', f, :children %>
+              <a href="#" class='js-add-field' data-level='1' data-parent="item[children_attributes][<%= DateTime.now.to_i %>]">Add new</a>
             </div>
           </li>
         </ul>
@@ -16,7 +21,7 @@
         <ul>
           <li>
             <div class="children-wrapper else-children-wrapper">
-              <%= link_to_add_fields 'Add  rule', f, :children, {truthy: false}  %>
+              <a href="#" class='js-add-field' data-level='0' data-parent="item[children_attributes][<%= DateTime.now.to_i+1 %>]">Add new</a>
             </div>
           </li>
         </ul>
@@ -29,3 +34,5 @@
     <%= f.submit "Save", class: "" %>
   </div>
 <% end %>
+
+<%= render partial: 'underscore_template' %>

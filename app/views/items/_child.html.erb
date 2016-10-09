@@ -1,0 +1,21 @@
+<li>
+  <span class="Collapsable"> <%= text %> (<%= item.definition %>)</span>
+  <ul>
+    <% item.truthy_children.each do |child|  %>
+      <%= render partial: "child", locals: {item: child, text: "IF"} %>
+    <% end %>
+  </ul>
+</li>
+<% unless item.falsey_children.empty?  %>
+<li>
+  <span>Else</span>
+  <ul>
+    <% item.falsey_children.each do |child|  %>
+      <%= render partial: "child", locals: {item: child, text: "ELSE"} %>
+    <% end %>
+  </ul>
+</li>
+<li>
+  <span>END</span>
+</li>
+<% end %>

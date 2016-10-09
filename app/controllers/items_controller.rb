@@ -50,13 +50,13 @@ class ItemsController < ApplicationController
   end
 
   def build_children
-    2.times { @item.children.build } if @item
+    1.times { @item.children.build.children.build }
   end
 
   def save_item
     if @item.save
       flash[:notice] = "Person saved successfuly"
-      redirect_to root_path
+      redirect_to @item
     else
       flash[:error] = @item.errors.full_messages.to_sentence
       false
@@ -65,7 +65,7 @@ class ItemsController < ApplicationController
 
   def item_params
     item_params = params[:item]
-    item_params ? item_params.permit(:definition, :truthy, children_attributes: [:id , :definition, :truthy, :destroy]) :  {}
+    item_params ? item_params.permit! : {}
   end
 
   def children_attributes

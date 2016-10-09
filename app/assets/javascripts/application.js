@@ -14,28 +14,51 @@
 //= require jquery_ujs
 //= require_tree .
 
-var addField = function(condition) {
-  return function(e) {
-    var selector = 'data-form-prepend-'+condition;
-    var obj = $( $(this).attr(selector));
-    obj.find('input, select, textarea').each( function() {
-      $(this).attr( 'name', function() {
-        return $(this).attr('name').replace( 'new_record', (new Date()).getTime() );
-      });
-    });
-    $('.'+condition+'-children-wrapper').append(obj)
-    return false;
-  }
-}
+// var addField = function(condition) {
+//   return function(e) {
+//     var selector = 'data-form-prepend-'+condition;
+//     var obj = $( $(this).attr(selector));
+//     obj.find('input, select, textarea').each( function() {
+//       $(this).attr( 'name', function() {
+//         return $(this).attr('name').replace( 'new_record', (new Date()).getTime() );
+//       });
+//     });
+//     $('.'+condition+'-children-wrapper').append(obj)
+//     return false;
+//   }
+// }
 
 var removeField = function(e) {
   e.preventDefault();
   $(this).parent('div').remove();
 }
 
-$(function(){
-  $('[data-form-prepend-if]').click(addField('if'));
-  $('[data-form-prepend-else]').click(addField('else'));
+var toogleElse = function (e) {
+  e.preventDefault();
+  $(this).parent('.else-wrapper').slideToggle('slow');
+}
 
-  $('.children-wrapper').on('click','.remove-field', removeField);
+var addField = function(e) {
+  var level = $(e.toElement).data('level');
+  var parent_id = $(e.toElement).data('parent-id');
+  var parent = $(e.toElement).data('parent');
+  var compiled = _.template($('#itemTemplate').html());
+  $(this).parent().append(compiled({
+    level: level,
+    parent: parent,
+    parent_id: parent_id || 0,
+    id: (new Date()).getTime()
+  }));
+}
+
+$(function(){
+  _.templateSettings = {
+    interpolate: /\{\{\=(.+?)\}\}/g,
+    evaluate: /\{\{(.+?)\}\}/g
+  };
+
+  $('.children-wrapper').on('click','.js-remove-field', removeField);
+  $('.children-wrapper').on('click','.js-add-field', addField);
+  $('body').on('click','.js-else-wrapper', toogleElse );
 })
+

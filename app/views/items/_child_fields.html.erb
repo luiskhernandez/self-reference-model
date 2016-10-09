@@ -3,7 +3,19 @@
   <%= f.text_field :definition, class: '' %>
   <a href="#" class='remove-field'>x</a>
   <div style='display: none'>
-    <%= f.check_box :truthy, { checked: truthy } %>
+    <%= f.check_box :truthy  %>
   </div>
+  <ul>
+    <li>
+      <div>
+        <%= f.fields_for :children do |c|  %>
+          <%= render partial: 'child_fields', locals: { f: c } %>
+        <% end %>
+      </div>
+      <div class="children-wrapper if-children-wrapper">
+        <a href="#" class='js-add-field' data-level='0'>Add new</a>
+      </div>
+    </li>
+  </ul>
 </div>
 

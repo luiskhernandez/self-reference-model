@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+
   belongs_to :parent, class_name: 'Item'
   has_many :children, class_name: 'Item', foreign_key: 'parent_id'
 
@@ -6,11 +7,11 @@ class Item < ActiveRecord::Base
 
   validates :definition, presence: true
 
-  def truths
+  def truthy_children
     children.where(truthy: true)
   end
 
-  def falsey
+  def falsey_children
     children.where(truthy: false)
   end
 end

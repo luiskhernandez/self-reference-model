@@ -1,0 +1,39 @@
+<script type='text/html' id='itemTemplate'>
+  <div>
+     <a href="#" class="js-remove-field">x</a>
+      <ul>
+        <li>
+          <div>
+            IF <input class="" type="text" name="{{=parent}}[definition]" id="item_children_attributes_{{=id}}_definition">
+            <div style="display: block">
+                <input name="{{=parent}}[truthy]" type="hidden" value="0">
+                {{ if (level == '1'){ }}
+                  <input type="checkbox" value="1" checked name="{{= parent}}[truthy]" id="item_children_attributes_{{=id}}_truthy">
+                {{ } else { }}
+                <input type="checkbox" value="1" name="{{= parent}}[truthy]" id="item_children_attributes_{{=id}}_truthy">
+                {{ } }}
+            </div>
+          </div>
+          <ul>
+            <li>
+              <div class="children-wrapper if-children-wrapper">
+                <a href="#" class='js-add-field' data-parent="{{=parent}}[children_attributes][{{=id}}]" data-parent-id="{{=id}}" data-level="1">Add new</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span>ELSE</span>
+          <ul>
+            <li>
+              <div class="children-wrapper else-children-wrapper">
+                <a href="#" class='js-add-field' data-parent="{{=parent}}[children_attributes][{{=id}}]" data-parent-id="{{=id}}" data-level="0">Add new</a>
+              </div>
+            </li>
+          </ul>
+          <span>END</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</script>
